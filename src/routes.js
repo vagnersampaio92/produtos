@@ -3,8 +3,11 @@ const routes = require("express").Router();
 const authMiddleware = require("./app/middleware/auth");
 
 const SessionController = require("./app/controllers/User/SessionUser");
+const UserController = require("./app/controllers/User/User");
 
-routes.post("/sessions", SessionController.store);
+
+routes.post("/singin", SessionController.store);
+routes.post("/singup", UserController.store);
 
 routes.use(authMiddleware);
 
