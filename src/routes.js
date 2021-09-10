@@ -10,7 +10,8 @@ routes.post("/singin", SessionController.store);
 routes.post("/singup", UserController.store);
 routes.put("/updateuser/:id", UserController.update);
 routes.delete("/deleteuser/:id", UserController.delete);
-
+routes.get("/listalluser", UserController.listAlll);
+routes.get("/listusersbyid/:id",UserController.listById)
 
 routes.use(authMiddleware);
 

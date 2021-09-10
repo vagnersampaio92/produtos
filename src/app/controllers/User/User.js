@@ -18,8 +18,35 @@ class UserController {
         }
 
     }
-    async listAlll(req, res) { }
-    async listById(req, res) { }
+    async listAlll(req, res) {
+        try {
+            const user = await User.findAll({
+                attributes: ['id','name','email']
+            })
+            res.json(user);
+
+        } catch (error) {
+            return res.status(401).json({ message: error })
+        }
+    }
+    async listById(req, res) {
+        try {
+            const user = await User.findOne({
+                attributes: ['id','name','email'],
+                where: {
+                    id: req.params.id
+                }
+            })
+            
+            if (!user) {
+                return res.status(404).json({ message: 'User not found.' })
+            } else {
+                res.json(user);
+            }
+        } catch (error) {
+            return res.status(401).json({ message: error })
+        }
+     }
     async delete(req, res) {
         try {
             const user = await User.destroy(
@@ -29,15 +56,15 @@ class UserController {
                     }
                 }
             )
-            if(user === 0){
-                return res.status(404).json({ message: 'User not found.'})
-            }else{
+            if (user === 0) {
+                return res.status(404).json({ message: 'User not found.' })
+            } else {
                 res.json({ message: `Success, ${user} deleted users.` });
             }
-            
+
 
         } catch (error) {
-            return res.status(401).json({ message: error})
+            return res.status(401).json({ message: error })
         }
     }
     async update(req, res) {
