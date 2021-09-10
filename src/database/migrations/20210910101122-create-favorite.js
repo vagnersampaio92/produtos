@@ -19,6 +19,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
+      product_id: {
+        allownull:false,
+        type: Sequelize.STRING
+      },
       price: {
         allownull:false,
         type: Sequelize.FLOAT
@@ -31,11 +35,14 @@ module.exports = {
         allownull:false,
         type: Sequelize.STRING
       },
-      reviewScore: {
+      review_score: {
         allownull:false,
         type: Sequelize.FLOAT
       },
-
+      url: {
+        allownull:false,
+        type: Sequelize.STRING
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false

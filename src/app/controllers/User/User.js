@@ -34,7 +34,7 @@ class UserController {
             const user = await User.findOne({
                 attributes: ['id','name','email'],
                 where: {
-                    id: req.params.id
+                    id: req.userId
                 }
             })
             
