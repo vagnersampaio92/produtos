@@ -1,21 +1,22 @@
 //const { User } = require('./')
 
 module.exports = (sequelize, DataTypes) => {
-    const favorite = sequelize.define('favorites', {
+    const Favorite = sequelize.define('Favorite', {
         user_id: DataTypes.INTEGER,
+        product_id:DataTypes.STRING,
         price: DataTypes.FLOAT,
         image: DataTypes.STRING,
         title: DataTypes.STRING,
-        reviewScore: DataTypes.FLOAT,
+        review_score: DataTypes.FLOAT,
         url: DataTypes.STRING,
 
     }, {})
 
-    favorite.associate = models => {
-        favorite.belongsTo(models.User, { foreignKey: 'user_id' })
+    Favorite.associate = models => {
+        Favorite.belongsTo(models.User, { foreignKey: 'user_id' })
 
     }
 
 
-    return favorite
+    return Favorite
 }
