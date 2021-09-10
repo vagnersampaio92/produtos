@@ -12,9 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         hooks: {
             beforeSave: async user => {
-                if (user.password) {
-                    user.password_hash = await bcrypt.hash(user.password, 8)
-                }
+                await encrypt(user)
+            },
+            beforeUpdate: async user => {
+                await encrypt(user)
             }
         }
     })
@@ -25,6 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     User.prototype.generateToken = function () {
         return jwt.sign({ id: this.id }, process.env.APP_SECRET);
     };
+    async function encrypt(user) {
+        if (user.password) {
+            user.password_hash = await bcrypt.hash(user.password, 8)
+        }
+    }
 
     return User
 }
