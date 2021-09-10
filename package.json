@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
+    "promise-redis": "^0.0.5",
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
