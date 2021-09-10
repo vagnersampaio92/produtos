@@ -14,9 +14,16 @@ routes.delete("/deleteuser/:id", UserController.delete)
 routes.get("/listalluser", UserController.listAlll)
 routes.get("/listusersbyid/:id",UserController.listById)
 
-routes.post("/addfavorite", FavoriteController.store)
+
+
 
 routes.use(authMiddleware)
+
+
+routes.get("/listusersbyid",UserController.listById)
+
+routes.post("/addfavorite", FavoriteController.store)
+routes.delete("/deletefavorite/:product_id", FavoriteController.delete)
 
 routes.get("/dashboard", (req, res) => {
   return res.status(200).send()
