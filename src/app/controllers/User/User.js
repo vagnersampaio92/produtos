@@ -48,11 +48,12 @@ class UserController {
         }
      }
     async delete(req, res) {
+        
         try {
             const user = await User.destroy(
                 {
                     where: {
-                        id: req.params.id
+                        id: req.userId
                     }
                 }
             )
@@ -75,7 +76,7 @@ class UserController {
             }
             const user = await User.findOne({
                 where: {
-                    id: req.params.id
+                    id: req.userId
                 },
             })
             await user.update(body);
