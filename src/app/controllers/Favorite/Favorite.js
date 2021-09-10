@@ -28,7 +28,7 @@ class FavoriteController {
                 return res.status(401).json({ message: "Product already exists in the list." })
             }
             obj.user_id = req.userId,
-            obj.product_id = product_id
+                obj.product_id = product_id
             obj.price = response.data.price
             obj.image = response.data.image
             obj.title = response.data.title
@@ -44,10 +44,17 @@ class FavoriteController {
 
     }
     async listAlll(req, res) {
+        try {
+            const favorite = await Favorite.findAll({
+                where: {
+                    user_id: req.userId
+                }
+            })
+            res.json(favorite);
 
-    }
-    async listById(req, res) {
-
+        } catch (error) {
+            return res.status(401).json({ message: error })
+        }
     }
     async delete(req, res) {
         try {

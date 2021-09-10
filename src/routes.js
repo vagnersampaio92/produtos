@@ -7,6 +7,8 @@ const UserController = require("./app/controllers/User/User")
 const FavoriteController = require("./app/controllers/Favorite/Favorite")
 
 
+
+//rotas públicas do usuário
 routes.post("/singin", SessionController.store)
 routes.post("/singup", UserController.store)
 routes.put("/updateuser/:id", UserController.update)
@@ -14,15 +16,14 @@ routes.delete("/deleteuser/:id", UserController.delete)
 routes.get("/listalluser", UserController.listAlll)
 routes.get("/listusersbyid/:id",UserController.listById)
 
-
-
-
 routes.use(authMiddleware)
 
-
+//rotas privadas do usuário
 routes.get("/listusersbyid",UserController.listById)
 
+//favorite
 routes.post("/addfavorite", FavoriteController.store)
+routes.get("/listAllProductByUser", FavoriteController.listAlll)
 routes.delete("/deletefavorite/:product_id", FavoriteController.delete)
 
 routes.get("/dashboard", (req, res) => {
