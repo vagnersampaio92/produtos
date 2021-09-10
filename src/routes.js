@@ -5,8 +5,12 @@ const authMiddleware = require("./app/middleware/auth")
 const SessionController = require("./app/controllers/User/SessionUser")
 const UserController = require("./app/controllers/User/User")
 const FavoriteController = require("./app/controllers/Favorite/Favorite")
+const ListController = require("./app/controllers/List/ListProduct")
 
 
+//rota pública para listar pordutos
+
+routes.get("/listAllProduct/:page", ListController.listAll)
 
 //rotas públicas do usuário
 routes.post("/singin", SessionController.store)
