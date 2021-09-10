@@ -8,6 +8,7 @@ const UserController = require("./app/controllers/User/User");
 
 routes.post("/singin", SessionController.store);
 routes.post("/singup", UserController.store);
+routes.put("/updateuser/:id", UserController.update);
 
 routes.use(authMiddleware);
 

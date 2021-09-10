@@ -18,6 +18,30 @@ class UserController {
         }
 
     }
+    async listAlll(req, res) { }
+    async listById(req, res) { }
+    async delete(req, res) { }
+    async update(req, res) {
+        let { body } = req
+        try {
+
+            if (body.email && !validateEmail(body.email)) {
+                return res.status(401).json({ message: "invalid email" })
+            }
+            const user = await User.findOne({
+                where: {
+                    id: req.params.id
+                },
+            })
+
+            await user.update(body);
+
+            return res.json({ message: `success` });
+
+        } catch (error) {
+            return res.status(401).json({ message: "Error, invalid data" })
+        }
+    }
 
 
 }
