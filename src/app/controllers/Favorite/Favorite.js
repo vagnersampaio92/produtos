@@ -27,8 +27,8 @@ class FavoriteController {
             if (thereIsThis != null) {
                 return res.status(401).json({ message: "Product already exists in the list." })
             }
-            obj.user_id = req.userId,
-                obj.product_id = product_id
+            obj.user_id = req.userId
+            obj.product_id = product_id
             obj.price = response.data.price
             obj.image = response.data.image
             obj.title = response.data.title

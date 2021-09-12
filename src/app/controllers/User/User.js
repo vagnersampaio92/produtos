@@ -4,19 +4,15 @@ class UserController {
 
     async store(req, res) {
         try {
-
             if (validateEmail(req.body.email)) {
                 const user = await User.create(req.body)
                 return res.json(user);
             } else {
                 return res.status(401).json({ message: "invalid email" })
             }
-
-
         } catch (error) {
             return res.status(401).json({ message: error.errors[0].message })
         }
-
     }
     async listAlll(req, res) {
         try {
@@ -48,7 +44,6 @@ class UserController {
         }
      }
     async delete(req, res) {
-        
         try {
             const user = await User.destroy(
                 {
@@ -62,8 +57,6 @@ class UserController {
             } else {
                 res.json({ message: `Success, ${user} deleted users.` });
             }
-
-
         } catch (error) {
             return res.status(401).json({ message: error })
         }
