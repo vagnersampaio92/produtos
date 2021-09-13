@@ -6,11 +6,20 @@
 
 - [x] Cadastro de usuário
 - [x] Login e sessão
-- [x] lista usuários
-- [x] editar usuários
-- [x] deletar usuários
-- [x] deletar usuários
+- [x] Lista usuários
+- [x] Lista usuário pelo id
+- [x] Editar usuários
+- [x] Deletar usuários
+- [x] Lista de produtos
+- [x] Cache de dados, para deixar o acesso recorrente mais rápido
+- [x] Adiciona um produto a lista de favoritos
+- [x] Lista todos os produtos favoritos
+- [x] Deletar um produto da lista de favoritos
 
+### Features futuras
+- [ ] Logout de usuário
+- [ ] Expiração e refresh token
+- [ ] Pré-load em cache da página seguinte, para deixar a nevegação do usuário mais rápida (Utilizar a lib como o [BULL](https://www.npmjs.com/package/bull) para criar Background jobs)
 
 ### Pré-requisitos
 
@@ -57,4 +66,10 @@ $ yarn sequelize db:migrate
 
   Após rodar o projeto é possível utilizar a documentação feita no Swagger acessando a rota: http://localhost:3000/doc/ no seu navegador.
   
-  
+### Teste automatizados
+
+```bash
+# Execute os testes
+$ yarn test
+```
+![Screenshot](https://imagensvagner.s3.sa-east-1.amazonaws.com/Captura+de+Tela+2021-09-13+a%CC%80s+16.23.15.png)
