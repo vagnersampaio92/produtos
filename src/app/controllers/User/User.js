@@ -6,7 +6,6 @@ class UserController {
         try {
             if (validateEmail(req.body.email)) {
                 const user = await User.create(req.body)
-                console.log
                 delete user.dataValues.password_hash
                 return res.json(user);
             } else {
