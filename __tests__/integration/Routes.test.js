@@ -1,6 +1,7 @@
 const request = require('supertest')
 const faker = require('faker')
 const app = require('../../src/app')
+const axios = require('axios')
 
 const truncate = require("../utils/truncate");
 
@@ -37,10 +38,7 @@ describe('teste de rotas', () => {
             name: faker.name.findName(),
             password: faker.internet.password()
         })
-
         expect(response.status).toBe(200)
-
-
     })
     it('valida se é possível criar 2 usuário com o mesmo email', async () => {
         const response = await request(app)
@@ -339,7 +337,6 @@ describe('teste de rotas', () => {
         .get('/listUsersByid')
         .set("Authorization", `Bearer ${token}`)
         const {name, email} = response.body
-        console.log(response.body)
         expect(response.status).toBe(200)
 
         response = await request(app)
@@ -414,5 +411,149 @@ describe('teste de rotas', () => {
         expect(response.status).toBe(401)
 
 
+    })
+    it('testa rota que lista os produtos', async () => {
+        const numer = faker.datatype.number({
+            'min': 1,
+            'max': 440
+        });
+        let response = await request(app)
+        .get(`/listAllProduct/${numer}`)
+        expect(response.status).toBe(200)
+
+        response = await request(app)
+        .get('/listAllProduct/441')
+        expect(response.status).toBe(404)
+
+        response = await request(app)
+        .get(`/listAllProduct/${numer}`)
+        expect(response.status).toBe(200)
+
+
+    })
+    it('testa a adição de um produto na lista de favoritos', async () => {
+        const page = faker.datatype.number({
+            'min': 1,
+            'max': 439
+        });
+        const product = faker.datatype.number({
+            'min': 1,
+            'max': 100
+        });
+        const failId = faker.datatype.number({
+            'min': 1,
+            'max': 99
+        });
+        const failIdLong = faker.datatype.number({
+            'min': 100,
+            'max': 99999
+        });
+        const token = await login()
+        const responseProducts = await axios.get(`http://challenge-api.luizalabs.com/api/product/?page=${page}`)
+        const {id, image, brand, price, title} = responseProducts.data.products[product] 
+        
+        
+        let response = await request(app)
+        .post('/addfavorite')
+        .send({
+            product_id: id
+        })
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(200)
+        expect(response.body.product_id).toBe(id);
+        expect(response.body.price).toBe(price);
+        expect(response.body.image).toBe(image);
+        expect(response.body.title).toBe(title);
+        expect(response.body.url).toBe(`http://challenge-api.luizalabs.com/api/product/${id}/`);
+        expect(response.body).not.toHaveProperty("brand");;
+        
+        response = await request(app)
+        .post('/addfavorite')
+        .send({
+            product_id: id
+        })
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(401)
+
+        response = await request(app)
+        .post('/addfavorite')
+        .send({
+            product_id: failId
+        })
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(404)
+
+        response = await request(app)
+        .post('/addfavorite')
+        .send({
+            product_id: failIdLong
+        })
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(404)
+
+
+        response = await request(app)
+        .delete('/deleteUser')
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(200)
+
+        response = await request(app)
+        .post('/addfavorite')
+        .send({
+            product_id: id
+        })
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(404)
+
+
+    })
+    it('testa delete de um produto favorito', async () => {
+        const page = faker.datatype.number({
+            'min': 1,
+            'max': 439
+        });
+        const product = faker.datatype.number({
+            'min': 1,
+            'max': 100
+        });
+        const token = await login()
+        const responseProducts = await axios.get(`http://challenge-api.luizalabs.com/api/product/?page=${page}`)
+        const {id, image, brand, price, title} = responseProducts.data.products[product] 
+        
+        let response = await request(app)
+        .post('/addfavorite')
+        .send({
+            product_id: id
+        })
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(200)
+        expect(response.body.product_id).toBe(id);
+        expect(response.body.price).toBe(price);
+        expect(response.body.image).toBe(image);
+        expect(response.body.title).toBe(title);
+        expect(response.body.url).toBe(`http://challenge-api.luizalabs.com/api/product/${id}/`);
+        expect(response.body).not.toHaveProperty("brand");;
+  
+        response = await request(app)
+        .get('/listAllProductByUser')
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(200)
+        expect(response.body[0].product_id).toBe(id);
+
+        response = await request(app)
+        .delete(`/deletefavorite/${id}`)
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(200)
+    
+        response = await request(app)
+        .get('/listAllProductByUser')
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(200)
+        expect(response.body.length).toBe(0);
+
+        response = await request(app)
+        .delete(`/deletefavorite/${product}`)
+        .set("Authorization", `Bearer ${token}`)
+        expect(response.status).toBe(404)
     })
 })

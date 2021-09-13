@@ -22,10 +22,7 @@ class SessionController {
 
         delete user.dataValues.password_hash
 
-        return res.json({
-            user,
-            token: user.generateToken()
-        });
+        return res.json({ user, token: user.generateToken()});
     }
 }
 

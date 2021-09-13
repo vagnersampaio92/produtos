@@ -17,6 +17,9 @@ class FavoriteController {
                 return res.status(404).json({ message: 'User not found.' })
             }
             const response = await axios.get(`http://challenge-api.luizalabs.com/api/product/${product_id}/`)
+            if(response.data.products){
+                return res.status(404).json({ message: 'Product not found.' })
+            }
             const thereIsThis = await Favorite.findOne({
                 attributes: ['id'],
                 where: {
@@ -27,6 +30,7 @@ class FavoriteController {
             if (thereIsThis != null) {
                 return res.status(401).json({ message: "Product already exists in the list." })
             }
+            
             obj.user_id = req.userId
             obj.product_id = product_id
             obj.price = response.data.price
@@ -39,7 +43,7 @@ class FavoriteController {
 
 
         } catch (error) {
-            return res.status(401).json({ message: "Invalid data." })
+            return res.status(404).json({ message: "Invalid data." })
         }
 
     }
