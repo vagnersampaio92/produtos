@@ -73,7 +73,7 @@ class FavoriteController {
             if (favorite == 0) {
                 return res.status(404).json({ message: 'Product or user not found.' })
             } else {
-                return res.json({ message: `Success, ${favorite} product or user users.` });
+                return res.json({ message: `Success, ${favorite} product deleted.` });
             }
 
         } catch (error) {
