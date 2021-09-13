@@ -6,12 +6,13 @@ class UserController {
         try {
             if (validateEmail(req.body.email)) {
                 const user = await User.create(req.body)
+                delete user.dataValues.password_hash
                 return res.json(user);
             } else {
                 return res.status(401).json({ message: "invalid email" })
             }
         } catch (error) {
-            return res.status(401).json({ message: error.errors[0].message })
+            return res.status(401).json({ message: "Error, data invalid." })
         }
     }
     async listAlll(req, res) {

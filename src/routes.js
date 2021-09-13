@@ -13,8 +13,8 @@ const ListController = require("./app/controllers/List/ListProduct")
 routes.get("/listAllProduct/:page", ListController.listAll)
 
 //rotas públicas do usuário
-routes.post("/singin", SessionController.store)
-routes.post("/singup", UserController.store)
+routes.post("/signin", SessionController.store)
+routes.post("/signup", UserController.store)
 
 
 routes.use(authMiddleware)
