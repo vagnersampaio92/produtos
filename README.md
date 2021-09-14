@@ -91,3 +91,7 @@ $ make start
 $ make logs
 
 ```
+
+### Licença
+
+[Licença](https://github.com/vagnersampaio92/produtos/blob/main/LICENSE.md) código aberto.
