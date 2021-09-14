@@ -43,7 +43,22 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/signuprespose"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -73,7 +88,22 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/signinresponse"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -98,12 +128,21 @@
             "required": true,
             "type": "integer",
             "format": "int32",
-            "description": ""
+            "description": "número da pagina que deseja ver a lista de produtos"
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/listAllProductRespose"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            },
             "headers": {}
           }
         }
@@ -140,7 +179,28 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "example": "success",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -168,7 +228,28 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "example": "Success, 1 deleted users.",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -196,7 +277,22 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/listalluserresponse"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -224,7 +320,22 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/listUsersByid"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -261,7 +372,22 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/addfavoriteresponse"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -291,12 +417,33 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": ""
+            "description": "id do produto a ser excluido da lista de favoritos"
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "example": "Success, 1 product deleted.",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -324,7 +471,22 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/listAllProductByUser"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
             "headers": {}
           }
         }
@@ -380,8 +542,27 @@
     }
   },
   "definitions": {
+    "401": {
+      "title": "Unauthorized",
+      "type": "object",
+      "properties": {
+        "message": {
+          "example": "invalid data",
+          "type": "string"
+        }
+      }
+    },
+    "404": {
+      "title": "Not found",
+      "type": "object",
+      "properties": {
+        "message": {
+          "example": "User not found.",
+          "type": "string"
+        }
+      }
+    },
     "signuprequest": {
-      "title": "signuprequest",
       "example": {
         "email": "example@example.com",
         "name": "example",
@@ -405,8 +586,36 @@
         "password"
       ]
     },
+    "signuprespose": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "email": {
+          "type": "string",
+          "example": "example@example.com"
+        },
+        "name": {
+          "type": "string",
+          "example": "example"
+        },
+        "password": {
+          "type": "string",
+          "example": "1234"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-09-13T18:30:14.856Z"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-09-13T18:30:14.856Z"
+        }
+      }
+    },
     "signinrequest": {
-      "title": "signinrequest",
       "example": {
         "email": "example@example.com",
         "password": "1234"
@@ -424,6 +633,224 @@
         "email",
         "password"
       ]
+    },
+    "signinresponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "name": {
+              "type": "string",
+              "example": "example"
+            },
+            "email": {
+              "type": "string",
+              "example": "example@example.com"
+            },
+            "createdAt": {
+              "type": "string",
+              "example": "2021-09-13T16:05:48.477Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "example": "2021-09-13T16:05:48.477Z"
+            }
+          }
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NisInR5cCI6IkpXVCJ9.eyJpZCI6MzQsImlhdCI6MTYzMTUTOTE1Mn0.-F5VKtr6_lrUj3fSuM5MTORNPh5MAMT_K9wqJznJQc"
+        }
+      }
+    },
+    "listAllProductRespose": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "object",
+          "properties": {
+            "page_number": {
+              "type": "integer",
+              "example": 1
+            },
+            "page_size": {
+              "type": "integer",
+              "example": 100
+            }
+          }
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reviewScore": {
+                "type": "number",
+                "example": 4.352941
+              },
+              "title": {
+                "type": "string",
+                "example": "Churrasqueira Elétrica Mondial 1800W"
+              },
+              "price": {
+                "type": "number",
+                "example": 159
+              },
+              "image": {
+                "type": "string",
+                "example": "http://challenge-api.luizalabs.com/images/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f.jpg"
+              },
+              "url": {
+                "type": "string",
+                "example": "http://challenge-api.luizalabs.com/api/product/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f/"
+              }
+            }
+          }
+        }
+      }
+    },
+    "listUsersByid": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "example"
+        },
+        "email": {
+          "type": "string",
+          "example": "example@example.com"
+        }
+      }
+    },
+    "listAllProductByUser": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "user_id": {
+            "type": "integer",
+            "example": 37
+          },
+          "product_id": {
+            "type": "string",
+            "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+          },
+          "reviewScore": {
+            "type": "number",
+            "example": 4.352941
+          },
+          "title": {
+            "type": "string",
+            "example": "Churrasqueira Elétrica Mondial 1800W"
+          },
+          "price": {
+            "type": "number",
+            "example": 159
+          },
+          "image": {
+            "type": "string",
+            "example": "http://challenge-api.luizalabs.com/images/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f.jpg"
+          },
+          "url": {
+            "type": "string",
+            "example": "http://challenge-api.luizalabs.com/api/product/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f/"
+          },
+          "UserId": {
+            "type": "integer",
+            "example": 37
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+          }
+        }
+      }
+    },
+    "addfavoriteresponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "user_id": {
+          "type": "integer",
+          "example": 37
+        },
+        "product_id": {
+          "type": "string",
+          "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+        },
+        "reviewScore": {
+          "type": "number",
+          "example": 4.352941
+        },
+        "title": {
+          "type": "string",
+          "example": "Churrasqueira Elétrica Mondial 1800W"
+        },
+        "price": {
+          "type": "number",
+          "example": 159
+        },
+        "image": {
+          "type": "string",
+          "example": "http://challenge-api.luizalabs.com/images/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f.jpg"
+        },
+        "url": {
+          "type": "string",
+          "example": "http://challenge-api.luizalabs.com/api/product/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f/"
+        },
+        "UserId": {
+          "type": "integer",
+          "example": 37
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+        }
+      }
+    },
+    "listalluserresponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "example"
+          },
+          "email": {
+            "type": "string",
+            "example": "example@example.com"
+          }
+        }
+      }
     },
     "userupdaterequest": {
       "title": "userupdaterequest",

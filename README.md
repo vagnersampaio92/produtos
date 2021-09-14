@@ -24,7 +24,7 @@
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/) e (opcional)[Yarn](https://yarnpkg.com/).
 Para facilitar o uso é recomendado ter o [Docker](https://www.docker.com/), caso não queira utilizar o docker, é necessário ter o [Postgres](https://www.postgresql.org/) e o [Redis](https://redis.io/) instalado e rodando localmente.
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
@@ -47,7 +47,7 @@ $ cd produtos
 $ make up
 
 # Instale as dependências
-$ yarn install
+$ yarn
 
 # Execute a aplicação em modo de desenvolvimento
 $ yarn dev
@@ -73,3 +73,20 @@ $ yarn sequelize db:migrate
 $ yarn test
 ```
 ![Screenshot](https://imagensvagner.s3.sa-east-1.amazonaws.com/Captura+de+Tela+2021-09-13+a%CC%80s+16.23.15.png)
+
+
+### Comandos do Makefile
+
+```bash
+#cria e inicia o container com os bancos de dados
+$ make up
+#apaga os containers
+$ make down
+#pausa a execução dos containers
+$ make stop
+#inicia os containers
+$ make start
+#mostra os logs
+$ make logs
+
+```
