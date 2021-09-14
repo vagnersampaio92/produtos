@@ -6,6 +6,7 @@
 
 - [x] Cadastro de usuário
 - [x] Login e sessão
+- [x] Criptografa a senha
 - [x] Lista usuários
 - [x] Lista usuário pelo id
 - [x] Editar usuários
