@@ -22,7 +22,8 @@
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
     "promise-redis": "^0.0.5",
-    "sequelize": "^6.6.5"
+    "sequelize": "^6.6.5",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "jest": "^27.1.1",

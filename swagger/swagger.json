@@ -1,0 +1,914 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Desafio LuizaLabs",
+    "contact": {
+      "email": "vagnersampaio92@gmail.com"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/signup": {
+      "post": {
+        "summary": "sign up",
+        "tags": [
+          "public"
+        ],
+        "operationId": "signup",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/signuprequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/signuprespose"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/signin": {
+      "post": {
+        "summary": "sign in",
+        "tags": [
+          "public"
+        ],
+        "operationId": "signin",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/signinrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/signinresponse"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/listAllProduct/{page}": {
+      "get": {
+        "description": "Está rota recebe a pagina como parâmetro e retorna uma lista de produtos, juntamente com alguns dados como: “reviewScore\",\"title\",\"price\",“image\" e\"url\".",
+        "summary": "list all product per page",
+        "tags": [
+          "public"
+        ],
+        "operationId": "listallproductperpage",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "número da pagina que deseja ver a lista de produtos"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/listAllProductRespose"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/updateUser": {
+      "put": {
+        "summary": "user update",
+        "tags": [
+          "private"
+        ],
+        "operationId": "userupdate",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/userupdaterequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "example": "success",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/deleteUser": {
+      "delete": {
+        "summary": "delete user",
+        "tags": [
+          "private"
+        ],
+        "operationId": "deleteuser",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "example": "Success, 1 deleted users.",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/listalluser": {
+      "get": {
+        "summary": "lista all users",
+        "tags": [
+          "private"
+        ],
+        "operationId": "listaallusers",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/listalluserresponse"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/listUsersByid": {
+      "get": {
+        "summary": "busca usuário pelo id",
+        "tags": [
+          "private"
+        ],
+        "operationId": "buscausuáriopeloid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/listUsersByid"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/addfavorite": {
+      "post": {
+        "summary": "add new favorite",
+        "tags": [
+          "private"
+        ],
+        "operationId": "addnewfavorite",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addnewfavoriterequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/addfavoriteresponse"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/deletefavorite/{product_id}": {
+      "delete": {
+        "summary": "delete favorite",
+        "tags": [
+          "private"
+        ],
+        "operationId": "deletefavorite",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id do produto a ser excluido da lista de favoritos"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "example": "Success, 1 product deleted.",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/listAllProductByUser": {
+      "get": {
+        "summary": "list all product by user",
+        "tags": [
+          "private"
+        ],
+        "operationId": "listallproductbyuser",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/listAllProductByUser"
+            }
+          },
+          "401": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/401"
+            }
+          },
+          "404": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/404"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/product": {
+      "get": {
+        "summary": "lista",
+        "tags": [
+          "api magalu"
+        ],
+        "operationId": "lista",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/product/34/": {
+      "get": {
+        "summary": "detalhes",
+        "tags": [
+          "api magalu"
+        ],
+        "operationId": "detalhes",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "401": {
+      "title": "Unauthorized",
+      "type": "object",
+      "properties": {
+        "message": {
+          "example": "invalid data",
+          "type": "string"
+        }
+      }
+    },
+    "404": {
+      "title": "Not found",
+      "type": "object",
+      "properties": {
+        "message": {
+          "example": "User not found.",
+          "type": "string"
+        }
+      }
+    },
+    "signuprequest": {
+      "example": {
+        "email": "example@example.com",
+        "name": "example",
+        "password": "1234"
+      },
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "name",
+        "password"
+      ]
+    },
+    "signuprespose": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "email": {
+          "type": "string",
+          "example": "example@example.com"
+        },
+        "name": {
+          "type": "string",
+          "example": "example"
+        },
+        "password": {
+          "type": "string",
+          "example": "1234"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-09-13T18:30:14.856Z"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-09-13T18:30:14.856Z"
+        }
+      }
+    },
+    "signinrequest": {
+      "example": {
+        "email": "example@example.com",
+        "password": "1234"
+      },
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "signinresponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "name": {
+              "type": "string",
+              "example": "example"
+            },
+            "email": {
+              "type": "string",
+              "example": "example@example.com"
+            },
+            "createdAt": {
+              "type": "string",
+              "example": "2021-09-13T16:05:48.477Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "example": "2021-09-13T16:05:48.477Z"
+            }
+          }
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NisInR5cCI6IkpXVCJ9.eyJpZCI6MzQsImlhdCI6MTYzMTUTOTE1Mn0.-F5VKtr6_lrUj3fSuM5MTORNPh5MAMT_K9wqJznJQc"
+        }
+      }
+    },
+    "listAllProductRespose": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "object",
+          "properties": {
+            "page_number": {
+              "type": "integer",
+              "example": 1
+            },
+            "page_size": {
+              "type": "integer",
+              "example": 100
+            }
+          }
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reviewScore": {
+                "type": "number",
+                "example": 4.352941
+              },
+              "title": {
+                "type": "string",
+                "example": "Churrasqueira Elétrica Mondial 1800W"
+              },
+              "price": {
+                "type": "number",
+                "example": 159
+              },
+              "image": {
+                "type": "string",
+                "example": "http://challenge-api.luizalabs.com/images/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f.jpg"
+              },
+              "url": {
+                "type": "string",
+                "example": "http://challenge-api.luizalabs.com/api/product/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f/"
+              }
+            }
+          }
+        }
+      }
+    },
+    "listUsersByid": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "example"
+        },
+        "email": {
+          "type": "string",
+          "example": "example@example.com"
+        }
+      }
+    },
+    "listAllProductByUser": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "user_id": {
+            "type": "integer",
+            "example": 37
+          },
+          "product_id": {
+            "type": "string",
+            "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+          },
+          "reviewScore": {
+            "type": "number",
+            "example": 4.352941
+          },
+          "title": {
+            "type": "string",
+            "example": "Churrasqueira Elétrica Mondial 1800W"
+          },
+          "price": {
+            "type": "number",
+            "example": 159
+          },
+          "image": {
+            "type": "string",
+            "example": "http://challenge-api.luizalabs.com/images/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f.jpg"
+          },
+          "url": {
+            "type": "string",
+            "example": "http://challenge-api.luizalabs.com/api/product/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f/"
+          },
+          "UserId": {
+            "type": "integer",
+            "example": 37
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+          }
+        }
+      }
+    },
+    "addfavoriteresponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "user_id": {
+          "type": "integer",
+          "example": 37
+        },
+        "product_id": {
+          "type": "string",
+          "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+        },
+        "reviewScore": {
+          "type": "number",
+          "example": 4.352941
+        },
+        "title": {
+          "type": "string",
+          "example": "Churrasqueira Elétrica Mondial 1800W"
+        },
+        "price": {
+          "type": "number",
+          "example": 159
+        },
+        "image": {
+          "type": "string",
+          "example": "http://challenge-api.luizalabs.com/images/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f.jpg"
+        },
+        "url": {
+          "type": "string",
+          "example": "http://challenge-api.luizalabs.com/api/product/571fa8cc-2ee7-5ab4-b388-06d55fd8ab2f/"
+        },
+        "UserId": {
+          "type": "integer",
+          "example": 37
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+        }
+      }
+    },
+    "listalluserresponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "example"
+          },
+          "email": {
+            "type": "string",
+            "example": "example@example.com"
+          }
+        }
+      }
+    },
+    "userupdaterequest": {
+      "title": "userupdaterequest",
+      "example": {
+        "name": "example new",
+        "email": "examplenew@example.com",
+        "password": "123456"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "password"
+      ]
+    },
+    "addnewfavoriterequest": {
+      "title": "addnewfavoriterequest",
+      "example": {
+        "product_id": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+      },
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "product_id"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "public",
+      "description": "Aqui estão as rotas que não precisam de autenticação para uso."
+    },
+    {
+      "name": "private",
+      "description": "Aqui estão as rotas que precisam de autenticação para uso."
+    },
+    {
+      "name": "api magalu",
+      "description": "Aqui estão as rotas fornecidas para o desafio."
+    }
+  ],
+  "externalDocs": {
+    "description": "Código do desafio.",
+    "url": "https://github.com/vagnersampaio92/produtos"
+  }
+}

@@ -3,11 +3,15 @@ require("dotenv").config({
   });
   
   const express = require("express");
+
+  const swaggerUI = require("swagger-ui-express")
+  const swaggerFile = require("./../swagger/swagger.json")
   
   class AppController {
     constructor() {
       this.express = express()
-  
+      this.express.use("/doc", swaggerUI.serve, swaggerUI.setup(swaggerFile))
+
       this.middlewares()
       this.routes()
     }
